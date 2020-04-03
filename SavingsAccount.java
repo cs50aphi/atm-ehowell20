@@ -17,7 +17,11 @@ public class SavingsAccount
     }
     // method
     // get balance
-    // withdrawl
+    public int getBalance()
+    {
+        return balance;
+    }
+    // withdraw
     // deposit
     // increase balance by interest rate
 }

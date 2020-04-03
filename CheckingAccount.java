@@ -13,7 +13,11 @@ public class CheckingAccount
         balance = startingBalance;
     }
     // methods
-    // withdrawl
+    // withdraw
     // get balance
+    public int getBalance()
+    {
+        return balance;
+    }
     // deposit
 }
