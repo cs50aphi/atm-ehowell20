@@ -152,6 +152,7 @@ public class ATM
                     break;
                 case "Q":
                 case "q":
+                    // marks quit as true to break loop
                     quit = true;
                     break;
                 // if user does not enter d, w, t, or q
@@ -159,7 +160,9 @@ public class ATM
                     System.out.println("Not a valid option");
 
             }
+            // increase transaction number after every transaction
             transaction++;
+            // calculate interest after 5 transactions
             if ((transaction % 5) == 0)
             {
                 savings.applyInterest();
