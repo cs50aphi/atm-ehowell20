@@ -21,11 +21,15 @@ public class SavingsAccount
     {
         balance += value;
     }
+    // withdraw
+    public void withdraw(int value)
+    {
+        balance -= value;
+    }
     // get balance
     public int getBalance()
     {
         return balance;
     }
-    // withdraw
     // increase balance by interest rate
 }

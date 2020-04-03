@@ -19,6 +19,10 @@ public class CheckingAccount
         balance += value;
     }
     // withdraw
+    public void withdraw(int value)
+    {
+        balance -= value;
+    }
     // get balance
     public int getBalance()
     {
