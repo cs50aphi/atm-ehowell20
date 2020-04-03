@@ -10,7 +10,7 @@ public class ATM
         // response value (when chosing between accounts)
         int value = 0;
         // deposit/withdraw/transfer credit value
-        int credits = 0;
+        double credits = 0;
         Scanner kb = new Scanner(System.in);
         // creates checking account with default balance
         CheckingAccount checking = new CheckingAccount();
@@ -135,6 +135,13 @@ public class ATM
                 System.out.println("Your savings account has " + savings.getBalance() + " credits");
             }
             transaction++;
+            if ((transaction % 5) == 0)
+            {
+                savings.applyInterest();
+                // print both account balances
+                System.out.println("Your checking account has " + checking.getBalance() + " credits");
+                System.out.println("Your savings account has " + savings.getBalance() + " credits");
+            }
         }
         while (!answer.equals("q") && !answer.equals("Q"));
     }

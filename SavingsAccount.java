@@ -2,34 +2,38 @@
 public class SavingsAccount
 {
     // instance variables
-    private int balance;
-    // private int interest ??
+    private double balance;
+    private double interest;
     // constructor
     public SavingsAccount()
     {
         balance = 100;
-        // interest = ????
+        interest = 0.1;
     }
-    public SavingsAccount(int startingBalance)
+    public SavingsAccount(double startingBalance, double startingInterest)
     {
         balance = startingBalance;
-        // interest = ???
+        interest = startingInterest;
     }
     // method
     // deposit
-    public void deposit(int value)
+    public void deposit(double value)
     {
         balance += value;
     }
     // withdraw
-    public void withdraw(int value)
+    public void withdraw(double value)
     {
         balance -= value;
     }
     // get balance
-    public int getBalance()
+    public double getBalance()
     {
         return balance;
     }
     // increase balance by interest rate
+    public void applyInterest()
+    {
+        balance += (balance * interest);
+    }
 }
