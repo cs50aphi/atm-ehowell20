@@ -7,8 +7,10 @@ public class ATM
         int transaction = 0;
         // response to atm question
         String answer = "G";
-        // deposit/withdraw/transfer credit value
+        // response value (when chosing between accounts)
         int value = 0;
+        // deposit/withdraw/transfer credit value
+        int credits = 0;
         Scanner kb = new Scanner(System.in);
         // creates checking account with default balance
         CheckingAccount checking = new CheckingAccount();
@@ -19,79 +21,68 @@ public class ATM
         do
         {
             System.out.print("Do you want to: (D)eposit, (W)ithdraw, (C)heck Balance, (T)ransfer, (Q)uit? ");
-            answer = kb.nextLine();
+            answer = kb.next();
             if (answer.equalsIgnoreCase("D"))
             {
                 // deposit
                 System.out.print("Deposit to: (1)Checking or (2)Savings? ");
                 value = kb.nextInt();
+                System.out.print("How many credits do you want to deposit? ");
+                credits = kb.nextInt();
                 if (value == 1)
                 {
                     // deposit into checking
-                    System.out.print("How many credits do you want to deposit? ");
-                    value = kb.nextInt();
-                    checking.deposit(value);
-                    // print both account balances
-                    System.out.println("Your checking account has " + checking.getBalance() + " credits");
-                    System.out.println("Your savings account has " + savings.getBalance() + " credits");
+                    checking.deposit(credits);
                 }
                 else
                 {
                     // deposit into savings
-                    System.out.print("How many credits do you want to deposit? ");
-                    value = kb.nextInt();
-                    savings.deposit(value);
-                    // print both account balances
-                    System.out.println("Your checking account has " + checking.getBalance() + " credits");
-                    System.out.println("Your savings account has " + savings.getBalance() + " credits");
+                    savings.deposit(credits);
                 }
+                // print both account balances
+                System.out.println("Your checking account has " + checking.getBalance() + " credits");
+                System.out.println("Your savings account has " + savings.getBalance() + " credits");
             }
             else if (answer.equalsIgnoreCase("W"))
             {
                 // withdraw
                 System.out.print("Withdraw from: (1)Checking or (2)Savings? ");
                 value = kb.nextInt();
+                System.out.print("How many credits do you want to withdraw? ");
+                credits = kb.nextInt();
                 if (value == 1)
                 {
                     // withdraw from checking
-                    System.out.print("How many credits do you want to withdraw? ");
-                    value = kb.nextInt();
                     // if withdaw value more then savings balance, do not allow
-                    if (value > checking.getBalance())
+                    if (credits > checking.getBalance())
                     {
                         System.out.println("Insufficient funds");
-                        // print both account balances
-                        System.out.println("Your checking account has " + checking.getBalance() + " credits");
-                        System.out.println("Your savings account has " + savings.getBalance() + " credits");
                     }
                     else
                     {
-                        checking.withdraw(value);
-                        // print both account balances
-                        System.out.println("Your checking account has " + checking.getBalance() + " credits");
-                        System.out.println("Your savings account has " + savings.getBalance() + " credits");
+                        // withdraw from checking
+                        checking.withdraw(credits);
                     }
+                    // print both account balances
+                    System.out.println("Your checking account has " + checking.getBalance() + " credits");
+                    System.out.println("Your savings account has " + savings.getBalance() + " credits");
                 }
                 else
                 {
                     // withdraw from savings
-                    System.out.print("How many credits do you want to withdraw? ");
-                    value = kb.nextInt();
                     // if withdaw value more then savings balance, do not allow
-                    if (value > savings.getBalance())
+                    if (credits > savings.getBalance())
                     {
                         System.out.println("Insufficient funds");
-                        // print both account balances
-                        System.out.println("Your checking account has " + checking.getBalance() + " credits");
-                        System.out.println("Your savings account has " + savings.getBalance() + " credits");
                     }
                     else
                     {
-                        savings.withdraw(value);
-                        // print both account balances
-                        System.out.println("Your checking account has " + checking.getBalance() + " credits");
-                        System.out.println("Your savings account has " + savings.getBalance() + " credits");
+                        // withdraw from savings
+                        savings.withdraw(credits);
                     }
+                    // print both account balances
+                    System.out.println("Your checking account has " + checking.getBalance() + " credits");
+                    System.out.println("Your savings account has " + savings.getBalance() + " credits");
                 }
             }
             else if (answer.equalsIgnoreCase("C"))
@@ -103,6 +94,45 @@ public class ATM
             else if (answer.equalsIgnoreCase("T"))
             {
                 // transfer
+                System.out.print("Transfer from: (1)Checking to Savings or (2)Savings to Checking? ");
+                value = kb.nextInt();
+                System.out.print("How many credits do you want to transfer? ");
+                credits = kb.nextInt();
+                if (value == 1)
+                {
+                    // checking to savings
+                    // checks if transfer value larger than account balance
+                    if (credits > checking.getBalance())
+                    {
+                        System.out.println("Insufficient Funds");
+                    }
+                    else
+                    {
+                        // withdraw from checking
+                        checking.withdraw(credits);
+                        // deposit into savings
+                        savings.deposit(credits);
+                    }
+                }
+                else
+                {
+                    // savings to checking
+                    // checks if transfer value larger than account balance
+                    if (credits > savings.getBalance())
+                    {
+                        System.out.println("Insufficient Funds");
+                    }
+                    else
+                    {
+                        // withdraw from savings
+                        savings.withdraw(credits);
+                        // deposit into checking
+                        checking.deposit(credits);
+                    }
+                }
+                // print both account balances
+                System.out.println("Your checking account has " + checking.getBalance() + " credits");
+                System.out.println("Your savings account has " + savings.getBalance() + " credits");
             }
             transaction++;
         }
