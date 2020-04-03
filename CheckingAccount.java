@@ -13,11 +13,15 @@ public class CheckingAccount
         balance = startingBalance;
     }
     // methods
+    // deposit
+    public void deposit(int value)
+    {
+        balance += value;
+    }
     // withdraw
     // get balance
     public int getBalance()
     {
         return balance;
     }
-    // deposit
 }

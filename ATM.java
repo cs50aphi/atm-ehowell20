@@ -23,16 +23,28 @@ public class ATM
             if (answer.equalsIgnoreCase("D"))
             {
                 // deposit
-                System.out.print("Deposit to: (1)Checking or (2)Savings?");
+                System.out.print("Deposit to: (1)Checking or (2)Savings? ");
                 value = kb.nextInt();
                 if (value == 1)
                 {
                     // deposit into checking
-                    System.out.println("How many credits do you want to deposit?");
+                    System.out.print("How many credits do you want to deposit? ");
+                    value = kb.nextInt();
+                    checking.deposit(value);
+                    // print both account balances
+                    System.out.println("Your checking account has " + checking.getBalance() + " credits");
+                    System.out.println("Your savings account has " + savings.getBalance() + " credits");
                 }
                 else
                 {
-                    System.out.println("How many credits do you want to deposit?");
+                    // deposit into savings
+                    System.out.print("How many credits do you want to deposit? ");
+                    value = kb.nextInt();
+                    savings.deposit(value);
+                    // print both account balances
+                    System.out.println("Your checking account has " + checking.getBalance() + " credits");
+                    System.out.println("Your savings account has " + savings.getBalance() + " credits");
+                    
                 }
             }
             else if (answer.equalsIgnoreCase("W"))

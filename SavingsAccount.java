@@ -16,12 +16,16 @@ public class SavingsAccount
         // interest = ???
     }
     // method
+    // deposit
+    public void deposit(int value)
+    {
+        balance += value;
+    }
     // get balance
     public int getBalance()
     {
         return balance;
     }
     // withdraw
-    // deposit
     // increase balance by interest rate
 }
